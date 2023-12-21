@@ -4,9 +4,9 @@ namespace JewelRun.Abstractions;
 
 public class Runner
 {
-    private Runner()
-    {			
-    }
+	private Runner()
+	{			
+	}
 
 	public static Runner Create() => new()
 	{
@@ -18,28 +18,20 @@ public class Runner
 
 	private static int GetRandom(int min, int max) => RandomNumberGenerator.GetInt32(min, max);
 
-    public int Awareness { get; init; }
+	public int Awareness { get; init; }
 	public int Attack { get; init; }
 	public int Defense { get; init; }
 	public int Mobility { get; init; }
 	public int Score => Awareness + Attack + Defense + Mobility;
-
-	public void SetIsAlive(bool isAlive) { IsAlive = isAlive; }
-	public void SetIsVisible(bool isVisible) { IsVisible = isVisible; }	
-	public void SetLocation(Location location) { Location = location; }
-
-	public bool IsAlive { get; private set; } = true;
-	public bool IsVisible { get; private set; } = true;
-	public Location Location { get; private set; }
-
-	public static string[] Names =>
+	
+	public static string[][] Names =>
 	[
-		"Apple",
-		"Banjo",
-		"Comet",
-		"Doodle",
-		"Ember",
-		"Fancy",
-		"Garlic"
+		[ "Ajax", "Acrid", "Apple" ],
+		[ "Brunswick", "Banjo", "Boom" ],
+		[ "Comet", "Cathode", "Carbon" ],
+		[ "Doodle", "Damsel" ],
+		[ "Ember", "Engine", "Euclid" ],
+		[ "Fancy", "Frame" ],
+		[ "Garlic", "Gallium" ]
 	];
 }
