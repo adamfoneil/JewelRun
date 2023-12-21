@@ -25,10 +25,12 @@ public class Runner
 	public int Score => Awareness + Attack + Defense + Mobility;
 
 	public void SetIsAlive(bool isAlive) { IsAlive = isAlive; }
-	public void SetIsVisible(bool isVisible) { IsVisible = isVisible; }
+	public void SetIsVisible(bool isVisible) { IsVisible = isVisible; }	
+	public void SetLocation(Location location) { Location = location; }
 
-	public bool IsAlive { get; private set; }
-	public bool IsVisible { get; private set; }	
+	public bool IsAlive { get; private set; } = true;
+	public bool IsVisible { get; private set; } = true;
+	public Location Location { get; private set; }
 
 	public static string[] Names =>
 	[
