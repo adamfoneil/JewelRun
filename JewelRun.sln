@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JewelRun.Abstractions", "JewelRun.Abstractions\JewelRun.Abstractions.csproj", "{0E81CF7D-B2D9-4CB0-8135-9A8C024DAAA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JewelRun.Abstractions", "JewelRun.Abstractions\JewelRun.Abstractions.csproj", "{0E81CF7D-B2D9-4CB0-8135-9A8C024DAAA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBoard.App", "GameBoard.App\GameBoard.App\GameBoard.App.csproj", "{4C649B6B-2951-45B7-82FD-9C5FAE25762D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBoard.App.Client", "GameBoard.App\GameBoard.App.Client\GameBoard.App.Client.csproj", "{9F2C9F2A-3EB5-4103-864C-64F6A41BE7A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBoard.Abstractions", "GameBoard.Abstractions\GameBoard.Abstractions.csproj", "{F958DEB0-7B76-4278-9CC0-B3BABD34D37B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{0E81CF7D-B2D9-4CB0-8135-9A8C024DAAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E81CF7D-B2D9-4CB0-8135-9A8C024DAAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E81CF7D-B2D9-4CB0-8135-9A8C024DAAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C649B6B-2951-45B7-82FD-9C5FAE25762D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C649B6B-2951-45B7-82FD-9C5FAE25762D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C649B6B-2951-45B7-82FD-9C5FAE25762D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C649B6B-2951-45B7-82FD-9C5FAE25762D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2C9F2A-3EB5-4103-864C-64F6A41BE7A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2C9F2A-3EB5-4103-864C-64F6A41BE7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2C9F2A-3EB5-4103-864C-64F6A41BE7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2C9F2A-3EB5-4103-864C-64F6A41BE7A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F958DEB0-7B76-4278-9CC0-B3BABD34D37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F958DEB0-7B76-4278-9CC0-B3BABD34D37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F958DEB0-7B76-4278-9CC0-B3BABD34D37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F958DEB0-7B76-4278-9CC0-B3BABD34D37B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

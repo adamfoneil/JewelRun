@@ -1,0 +1,40 @@
+﻿@page "/Game"
+<style>
+	main {		
+		display:flex;
+		justify-content:center;
+		align-items:center
+	}
+
+	.mainGrid {
+		display:grid;
+		@(CurrentGame.Css())
+	}
+
+	.gridCell {
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		border: 1px solid silver
+	}
+
+	.gridCell:hover {
+		background-color:antiquewhite
+	}
+</style>
+
+<main>
+	<div class="mainGrid">
+		@CurrentGame.Body()
+	</div>
+</main>
+
+@code {
+	private GameGrid CurrentGame = new();
+
+	protected override void OnInitialized()
+	{
+		CurrentGame = GameGrid.Create(10, 10);
+		StateHasChanged();
+	}
+}
