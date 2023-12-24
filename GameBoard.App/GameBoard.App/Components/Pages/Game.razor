@@ -18,8 +18,16 @@
 		border: 1px solid silver
 	}
 
+	.endZone {
+		background-color:deeppink;
+	}
+
 	.gridCell:hover {
 		background-color:antiquewhite
+	}
+
+	.jewelCarrier {
+		color:teal;
 	}
 </style>
 
@@ -30,14 +38,43 @@
 			Height="@CurrentGame.Height"
 			GetCellCssClass="GetCellClass"
 			GetCellContent="GetCellContent"/>
-	</div>
+	</div>	
 </main>
+
+<details>
+	<summary>Info</summary>
+	<div>Jewel carriers:</div>
+	<ul>
+		@foreach (var kp in CurrentGame.JewelCarriers)
+		{
+			<li>@kp.Key = @kp.Value</li>
+		}
+	</ul>
+</details>
 
 @code {
 	private JewelRunGameState CurrentGame = new();
 
-	private string GetCellClass(Location location) => "gridCell";
+	protected override void OnInitialized()
+	{		
+		CurrentGame.Initialize("Player1", "Player2");
+	}
 
-	private string GetCellContent(Location location) => $"{location.Column}, {location.Row}";
+	private string GetCellClass(Location location)
+	{
+		if (location == JewelRunGameState.EastEndZone) return "gridCell endZone";
+		if (location == JewelRunGameState.WestEndZone) return "gridCell endZone";
+		return "gridCell";
+	}
 
+	private string GetCellContent(Location location)
+	{
+		if (CurrentGame.HasPiece(location, out var pieceInfo))
+		{
+			var carrierClass = CurrentGame.IsJewelCarrier(pieceInfo.SideName, pieceInfo.Piece) ? "jewelCarrier" : string.Empty;
+			return $"<h1 class=\"{carrierClass}\" title=\"{pieceInfo.Piece.Name}\">{pieceInfo.Piece.Name[0]}</h1>";
+		}
+
+		return $"{location.Row}, {location.Column}";
+	}
 }

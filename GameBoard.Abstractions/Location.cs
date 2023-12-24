@@ -1,7 +1,7 @@
 ﻿namespace JewelRun.Abstractions;
 
-public readonly struct Location(int column, int row)
+public record Location(int Row, int Column)
 {
-	public int Column { get; init; } = column;
-	public int Row { get; init; } = row;
+	public int Column { get; init; } = Column;
+	public int Row { get; init; } = Row;
 }

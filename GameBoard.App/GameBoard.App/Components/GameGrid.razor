@@ -1,11 +1,11 @@
-﻿@for (int col = 1; col <= Width; col++)
+﻿@for (int row = 1; row <= Height; row++)
 {
-	for (int row = 1; row <= Height; row++)
+	for (int col = 1; col <= Width; col++)
 	{		
-		Location loc = new(col, row);
+		Location loc = new(row, col);
 		
 		<div id="@CellId(col, row)" class="@GetCellCssClass?.Invoke(loc)" style="@GetCellStyle?.Invoke(loc)">
-			@{ var content = GetCellContent(loc); }
+			@{ var content = new MarkupString(GetCellContent(loc) ?? string.Empty); }
 			@content
 		</div>
 	}
@@ -27,5 +27,5 @@
 	[Parameter]
 	public Func<Location, string?> GetCellStyle { get; set; } = (location) => default!;
 
-	private string CellId(int column, int row) => $"square-{column}-{row}";
+	private string CellId(int column, int row) => $"square-{row}-{column}";
 }

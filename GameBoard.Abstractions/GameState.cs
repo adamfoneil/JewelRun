@@ -4,7 +4,8 @@ namespace GameBoard.Abstractions;
 
 public abstract class GameState<TPiece>
 {
-	protected Dictionary<Location, (string PlayerName, TPiece Piece)> Pieces = [];
+	protected Dictionary<Location, (string SideName, TPiece Piece)> Pieces = [];
+	protected Dictionary<string, string> Players = [];
 
 	public GameState()
 	{
@@ -13,20 +14,35 @@ public abstract class GameState<TPiece>
 	public int Width { get; init; }
 	public int Height { get; init; }
 
-	public void Initialize(string[] playerNames)
-	{
-		List<(string, Location, TPiece)> pieces = [];
+	public abstract (string Name, Location Origin)[] Sides { get; }
 
-		var allPieces = playerNames
-			.SelectMany(GetDefaultPieces, (name, piece) => new { name, piece })
-			.Select(item => (item.name, item.piece.Location, item.piece.Piece));
+	private Dictionary<string, string> GetPlayers(string[] playerNames) => Sides
+		.Select((s, index) => (s.Name, index))
+		.ToDictionary(item => item.Name, item => playerNames[item.index]);
+		
+	public void Initialize(params string[] playerNames)
+	{
+		Players = GetPlayers(playerNames);
+
+		List<(string SideName, Location Location, TPiece Piece)> pieces = [];
+
+		var allPieces = Sides
+            .SelectMany(side => GetDefaultPieces(side.Origin), (side, piece) => new { side, piece })
+			.Select(item => (item.side.Name, item.piece.Location, item.piece.Piece))
+			.ToArray();
 
 		pieces.AddRange(allPieces);
 
-		Pieces = pieces.ToDictionary(row => row.Item2, row => (row.Item1, row.Item3));
+		Pieces = pieces.ToDictionary(row => row.Location, row => (row.SideName, row.Piece));
+
+		AfterInitialize(allPieces);
 	}
 
-	protected abstract IEnumerable<(Location Location, TPiece Piece)> GetDefaultPieces(string playerName);
+	protected virtual void AfterInitialize(IEnumerable<(string SideName, Location Location, TPiece Piece)> allPieces) { }
 
-	public (string PlayerName, TPiece? Piece) GetPiece(Location location) => Pieces.TryGetValue(location, out var piece) ? piece : default;
+	protected abstract IEnumerable<(Location Location, TPiece Piece)> GetDefaultPieces(Location origin);
+
+	public (string SideName, TPiece? Piece) GetPiece(Location location) => HasPiece(location, out var info) ? info : default;
+
+	public bool HasPiece(Location location, out (string SideName, TPiece Piece) result) => Pieces.TryGetValue(location, out result);
 }
