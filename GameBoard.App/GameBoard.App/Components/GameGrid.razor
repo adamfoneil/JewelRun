@@ -3,11 +3,10 @@
 	for (int col = 1; col <= Width; col++)
 	{		
 		Location loc = new(row, col);
-		
-		<div id="@CellId(col, row)" class="@(GetCellCssClass?.Invoke(loc))" style="@(GetCellStyle?.Invoke(loc))" @onclick="(args) => CellClick(loc, args)">
+		<button class="@(GetCellCssClass?.Invoke(loc))" style="@(GetCellStyle?.Invoke(loc))" @onclick="(args) => CellClick(args, loc)">
 			@{ var content = new MarkupString(GetCellContent(loc) ?? string.Empty); }
 			@content
-		</div>
+		</button>
 	}
 }
 
@@ -45,7 +44,7 @@
 
 	private string CellId(int column, int row) => $"square-{row}-{column}";
 
-	private async Task CellClick(Location location, MouseEventArgs args)
+	private async Task CellClick(MouseEventArgs args, Location location)
 	{
 		MoveArgs moveArgs = new();
 
@@ -71,5 +70,7 @@
 				NextClickBehavior = NextClickOptions.Starting;
 			}			
 		}
+
+		StateHasChanged();
 	}
 }
