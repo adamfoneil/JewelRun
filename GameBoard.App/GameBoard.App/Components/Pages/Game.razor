@@ -1,4 +1,5 @@
 ﻿@page "/Game"
+@using System.Diagnostics
 <style>
 	main {		
 		display:flex;
@@ -39,6 +40,8 @@
 			MoveStarted="OnMoveStarted" MoveCompleted="OnMoveCompleted" />
 	</div>	
 </main>
+
+<button @onclick="PlainHandler">hello2</button>
 
 <details>
 	<summary>Info</summary>
@@ -103,5 +106,11 @@
 				CurrentGame.MovePiece(pieceInfo.Piece, pieceInfo.SideName, args.SourceLocation, args.TargetLocation);
 			}
 		}		
+	}
+
+	private async Task PlainHandler(MouseEventArgs args)
+	{
+		await Task.CompletedTask;
+		Debugger.Break();
 	}
 }

@@ -1,14 +1,17 @@
-﻿@for (int row = 1; row <= Height; row++)
+﻿@using System.Diagnostics
+@for (int row = 1; row <= Height; row++)
 {
 	for (int col = 1; col <= Width; col++)
 	{		
 		Location loc = new(row, col);
-		<button class="@(GetCellCssClass?.Invoke(loc))" style="@(GetCellStyle?.Invoke(loc))" @onclick="(args) => CellClick(args, loc)">
+		<button class="@(GetCellCssClass?.Invoke(loc))" style="@(GetCellStyle?.Invoke(loc))" @onclick="PlainHandler">
 			@{ var content = new MarkupString(GetCellContent(loc) ?? string.Empty); }
 			@content
 		</button>
 	}
 }
+
+<button @onclick="PlainHandler">hello</button>
 
 @code {
 	private Location SelectedLocation = default!;
@@ -73,4 +76,10 @@
 
 		StateHasChanged();
 	}
+
+	private async Task PlainHandler(MouseEventArgs args)
+	{
+		await Task.CompletedTask;
+		Debugger.Break();
+	}	
 }
