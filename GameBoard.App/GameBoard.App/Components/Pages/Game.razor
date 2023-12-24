@@ -25,16 +25,24 @@
 
 <main>
 	<div class="mainGrid">
-		@CurrentGame.Body()
+		<GameGrid 
+			Width="@CurrentGame.Width" 
+			Height="@CurrentGame.Height"
+			GetCellCssClass="GetCellClass"
+			GetCellContent="GetCellContent"/>
 	</div>
 </main>
 
 @code {
-	private GameGrid CurrentGame = new();
+	private WebGameState CurrentGame = new JewelRunGameState();
 
 	protected override void OnInitialized()
 	{
-		CurrentGame = GameGrid.Create(10, 10);
-		StateHasChanged();
+		CurrentGame = new JewelRunGameState() { Width = 10, Height = 10 };		
 	}
+
+	private string GetCellClass(Location location) => "gridCell";
+
+	private string GetCellContent(Location location) => $"{location.Column}, {location.Row}";
+
 }

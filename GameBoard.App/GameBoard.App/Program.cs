@@ -1,4 +1,3 @@
-using GameBoard.Abstractions;
 using GameBoard.App.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
 	.AddInteractiveWebAssemblyComponents();
-
-builder.Services.AddScoped<GameGrid>();
 
 var app = builder.Build();
 

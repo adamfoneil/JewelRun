@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\GameBoard.Abstractions\GameBoard.Abstractions.csproj" />
+    <ProjectReference Include="..\..\JewelRun.Abstractions\JewelRun.Abstractions.csproj" />
     <ProjectReference Include="..\GameBoard.App.Client\GameBoard.App.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
   </ItemGroup>
