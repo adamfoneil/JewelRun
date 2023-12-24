@@ -2,15 +2,16 @@
 
 namespace JewelRun.Abstractions;
 
-public class JewelRunGameState : WebGameState
+public class JewelRunGameState : GameState<Runner>
 {
-	public override (string? CssClass, string? Style, string? Content) GetCell(int column, int row)
-	{
-		if (column == 3 && row == 3)
-		{
-			return ("gridCell", default, " <p>hello</p>");
-		}
+    public JewelRunGameState()
+    {
+		Width = 10;
+		Height = 10;
+    }
 
-		return ("gridCell", default, $"{column}, {row}");
+	protected override IEnumerable<(Location Location, Runner Piece)> GetDefaultPieces(string playerName)
+	{
+		throw new NotImplementedException();
 	}
 }

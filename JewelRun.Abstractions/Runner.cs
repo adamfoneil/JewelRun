@@ -26,7 +26,7 @@ public class Runner
 	
 	public static string[][] Names =>
 	[
-		[ "Ajax", "Acrid", "Apple" ],
+		[ "Ajax", "Acrid", "Avon" ],
 		[ "Brunswick", "Banjo", "Boom" ],
 		[ "Comet", "Cathode", "Carbon" ],
 		[ "Doodle", "Damsel" ],

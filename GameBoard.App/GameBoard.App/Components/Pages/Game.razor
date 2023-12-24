@@ -34,12 +34,7 @@
 </main>
 
 @code {
-	private WebGameState CurrentGame = new JewelRunGameState();
-
-	protected override void OnInitialized()
-	{
-		CurrentGame = new JewelRunGameState() { Width = 10, Height = 10 };		
-	}
+	private JewelRunGameState CurrentGame = new();
 
 	private string GetCellClass(Location location) => "gridCell";
 

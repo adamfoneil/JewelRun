@@ -4,7 +4,7 @@
 	{		
 		Location loc = new(col, row);
 		
-		<div id="@CellId(col, row)" class="@GetCellCssClass?.Invoke(loc)">
+		<div id="@CellId(col, row)" class="@GetCellCssClass?.Invoke(loc)" style="@GetCellStyle?.Invoke(loc)">
 			@{ var content = GetCellContent(loc); }
 			@content
 		</div>
@@ -23,6 +23,9 @@
 
 	[Parameter, EditorRequired]
 	public Func<Location, string?> GetCellContent { get; set; } = (location) => default;
+
+	[Parameter]
+	public Func<Location, string?> GetCellStyle { get; set; } = (location) => default!;
 
 	private string CellId(int column, int row) => $"square-{column}-{row}";
 }
