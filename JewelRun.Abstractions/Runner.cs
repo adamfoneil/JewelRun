@@ -36,7 +36,7 @@ public class Runner
 		[ "Comet", "Cathode", "Carbon" ],
 		[ "Doodle", "Damsel", "Darius" ],
 		[ "Ember", "Engine", "Euclid" ],
-		[ "Fancy", "Frame" ],
-		[ "Garlic", "Gallium" ]
+		[ "Fancy", "Frame", "Fulsome" ],
+		[ "Garlic", "Gallium", "Galax" ]
 	];
 }
