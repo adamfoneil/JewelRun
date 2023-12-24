@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using GameBoard.Abstractions;
+using System.Security.Cryptography;
 
 namespace JewelRun.Abstractions;
 
@@ -16,6 +17,8 @@ public class Runner
 		Defense = GetRandom(1, 3),
 		Mobility = GetRandom(3, 7)
 	};
+
+	public bool AllowMove(Location from, Location to) => from.GetDistance(to) <= Mobility;
 
 	private static int GetRandom(int min, int max) => RandomNumberGenerator.GetInt32(min, max);
 

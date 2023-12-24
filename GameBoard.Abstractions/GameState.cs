@@ -1,10 +1,14 @@
-﻿using JewelRun.Abstractions;
+﻿using System.Security.Cryptography;
 
 namespace GameBoard.Abstractions;
 
 public abstract class GameState<TPiece>
 {
 	protected Dictionary<Location, (string SideName, TPiece Piece)> Pieces = [];
+
+	/// <summary>
+	/// key = SideName, value = player name
+	/// </summary>
 	protected Dictionary<string, string> Players = [];
 
 	public GameState()
@@ -13,8 +17,15 @@ public abstract class GameState<TPiece>
 
 	public int Width { get; init; }
 	public int Height { get; init; }
+	public string CurrentSide { get; private set; } = default!;
 
 	public abstract (string Name, Location Origin)[] Sides { get; }
+
+	protected static string GetRandom(string[] values)
+	{
+		var index = RandomNumberGenerator.GetInt32(values.Length);
+		return values[index];
+	}
 
 	private Dictionary<string, string> GetPlayers(string[] playerNames) => Sides
 		.Select((s, index) => (s.Name, index))
@@ -23,6 +34,7 @@ public abstract class GameState<TPiece>
 	public void Initialize(params string[] playerNames)
 	{
 		Players = GetPlayers(playerNames);
+		CurrentSide = GetRandom(Sides.Select(s => s.Name).ToArray());
 
 		List<(string SideName, Location Location, TPiece Piece)> pieces = [];
 
@@ -45,4 +57,10 @@ public abstract class GameState<TPiece>
 	public (string SideName, TPiece? Piece) GetPiece(Location location) => HasPiece(location, out var info) ? info : default;
 
 	public bool HasPiece(Location location, out (string SideName, TPiece Piece) result) => Pieces.TryGetValue(location, out result);
+
+	public void MovePiece(TPiece piece, string sideName, Location from, Location to)
+	{
+		Pieces[to] = (sideName, piece);
+		Pieces.Remove(from);
+	}
 }

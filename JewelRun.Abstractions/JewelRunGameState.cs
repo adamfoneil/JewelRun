@@ -44,11 +44,5 @@ public class JewelRunGameState : GameState<Runner>
 		JewelCarriers = allPieces.GroupBy(p => p.SideName).ToDictionary(grp => grp.Key, grp => grp.MinBy(p => p.Piece.Score).Piece.Name);
 	}
 
-	public bool IsJewelCarrier(string sideName, Runner runner) => JewelCarriers[sideName].Equals(runner.Name);
-
-	private static string GetRandom(string[] values)
-	{
-		var index = RandomNumberGenerator.GetInt32(values.Length);
-		return values[index];
-	}
+	public bool IsJewelCarrier(string sideName, Runner runner) => JewelCarriers[sideName].Equals(runner.Name);	
 }

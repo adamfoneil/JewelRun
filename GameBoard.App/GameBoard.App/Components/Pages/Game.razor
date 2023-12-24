@@ -34,10 +34,9 @@
 <main>
 	<div class="mainGrid">
 		<GameGrid 
-			Width="@CurrentGame.Width" 
-			Height="@CurrentGame.Height"
-			GetCellCssClass="GetCellClass"
-			GetCellContent="GetCellContent"/>
+			Width="@CurrentGame.Width" Height="@CurrentGame.Height"
+			GetCellCssClass="GetCellClass" GetCellContent="GetCellContent"
+			MoveStarted="OnMoveStarted" MoveCompleted="OnMoveCompleted" />
 	</div>	
 </main>
 
@@ -50,6 +49,7 @@
 			<li>@kp.Key = @kp.Value</li>
 		}
 	</ul>
+	<div>Current turn: @CurrentGame.CurrentSide</div>
 </details>
 
 @code {
@@ -76,5 +76,32 @@
 		}
 
 		return $"{location.Row}, {location.Column}";
+	}
+
+	private async Task OnMoveStarted(MoveArgs args)
+	{
+		await Task.CompletedTask;
+
+		if (CurrentGame.HasPiece(args.SourceLocation, out var piece))
+		{			
+			args.IsValid = piece.SideName.Equals(CurrentGame.CurrentSide);
+		}
+	}
+
+	private async Task OnMoveCompleted(MoveArgs args)
+	{
+		await Task.CompletedTask;
+
+		// square must be empty to move to it
+		if (CurrentGame.HasPiece(args.TargetLocation, out _)) return;
+
+		if (CurrentGame.HasPiece(args.SourceLocation, out var pieceInfo))
+		{
+			args.IsValid = pieceInfo.Piece.AllowMove(args.SourceLocation, args.TargetLocation);
+			if (args.IsValid)
+			{
+				CurrentGame.MovePiece(pieceInfo.Piece, pieceInfo.SideName, args.SourceLocation, args.TargetLocation);
+			}
+		}		
 	}
 }

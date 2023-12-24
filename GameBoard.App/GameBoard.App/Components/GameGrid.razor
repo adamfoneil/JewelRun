@@ -4,7 +4,7 @@
 	{		
 		Location loc = new(row, col);
 		
-		<div id="@CellId(col, row)" class="@GetCellCssClass?.Invoke(loc)" style="@GetCellStyle?.Invoke(loc)">
+		<div id="@CellId(col, row)" class="@(GetCellCssClass?.Invoke(loc))" style="@(GetCellStyle?.Invoke(loc))" @onclick="(args) => CellClick(loc, args)">
 			@{ var content = new MarkupString(GetCellContent(loc) ?? string.Empty); }
 			@content
 		</div>
@@ -12,6 +12,16 @@
 }
 
 @code {
+	private Location SelectedLocation = default!;
+
+	public enum NextClickOptions
+	{
+		Starting,
+		Completing
+	}
+
+	private NextClickOptions NextClickBehavior = NextClickOptions.Starting;
+
 	[Parameter]
 	public int Width { get; set; }
 
@@ -27,5 +37,39 @@
 	[Parameter]
 	public Func<Location, string?> GetCellStyle { get; set; } = (location) => default!;
 
+	[Parameter]
+	public EventCallback<MoveArgs> MoveStarted { get; set; }
+
+	[Parameter]
+	public EventCallback<MoveArgs> MoveCompleted { get; set; }
+
 	private string CellId(int column, int row) => $"square-{row}-{column}";
+
+	private async Task CellClick(Location location, MouseEventArgs args)
+	{
+		MoveArgs moveArgs = new();
+
+		if (NextClickBehavior == NextClickOptions.Starting)
+		{
+			moveArgs.SourceLocation = location;
+			SelectedLocation = location;	
+			await MoveStarted.InvokeAsync(moveArgs);
+			if (moveArgs.IsValid)
+			{
+				NextClickBehavior = NextClickOptions.Completing;
+				return;
+			}			
+		}
+
+		if (NextClickBehavior == NextClickOptions.Completing)
+		{
+			moveArgs.SourceLocation = SelectedLocation;
+			moveArgs.TargetLocation = location;
+			await MoveCompleted.InvokeAsync(moveArgs);
+			if (moveArgs.IsValid)
+			{
+				NextClickBehavior = NextClickOptions.Starting;
+			}			
+		}
+	}
 }
