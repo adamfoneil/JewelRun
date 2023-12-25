@@ -34,7 +34,7 @@ public abstract class GameState<TPiece>
 	private Dictionary<string, string> GetPlayers(string[] playerNames) => Sides
 		.Select((s, index) => (s.Name, index))
 		.ToDictionary(item => item.Name, item => playerNames[item.index]);
-		
+
 	public void Initialize(params string[] playerNames)
 	{
 		Players = GetPlayers(playerNames);
@@ -43,7 +43,7 @@ public abstract class GameState<TPiece>
 		List<(string SideName, Location Location, TPiece Piece)> pieces = [];
 
 		var allPieces = Sides
-            .SelectMany(side => GetDefaultPieces(side.Origin), (side, piece) => new { side, piece })
+			.SelectMany(side => GetDefaultPieces(side.Origin), (side, piece) => new { side, piece })
 			.Select(item => (item.side.Name, item.piece.Location, item.piece.Piece))
 			.ToArray();
 

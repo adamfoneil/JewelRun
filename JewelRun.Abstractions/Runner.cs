@@ -28,15 +28,15 @@ public class Runner
 	public int Defense { get; init; }
 	public int Mobility { get; init; }
 	public int Score => Awareness + Attack + Defense + Mobility;
-	
+
 	public static string[][] Names =>
 	[
-		[ "Ajax", "Acrid", "Avon" ],
-		[ "Brunswick", "Banjo", "Boom" ],
-		[ "Comet", "Cathode", "Carbon" ],
-		[ "Doodle", "Damsel", "Darius" ],
-		[ "Ember", "Engine", "Euclid" ],
-		[ "Fancy", "Frame", "Fulsome" ],
-		[ "Garlic", "Gallium", "Galax" ]
+		["Ajax", "Acrid", "Avon"],
+		["Brunswick", "Banjo", "Boom"],
+		["Comet", "Cathode", "Carbon"],
+		["Doodle", "Damsel", "Darius"],
+		["Ember", "Engine", "Euclid"],
+		["Fancy", "Frame", "Fulsome"],
+		["Garlic", "Gallium", "Galax"]
 	];
 }
