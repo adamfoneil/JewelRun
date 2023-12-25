@@ -1,10 +1,12 @@
 ﻿@using System.Diagnostics
+@rendermode InteractiveWebAssembly
+
 @for (int row = 1; row <= Height; row++)
 {
 	for (int col = 1; col <= Width; col++)
 	{		
 		Location loc = new(row, col);
-		<button class="@(GetCellCssClass?.Invoke(loc))" style="@(GetCellStyle?.Invoke(loc))" @onclick="PlainHandler">
+		<button class="@(GetCellCssClass?.Invoke(loc))" style="@(GetCellStyle?.Invoke(loc))" @onclick="@((args) => CellClick(args, loc))">
 			@{ var content = new MarkupString(GetCellContent(loc) ?? string.Empty); }
 			@content
 		</button>
