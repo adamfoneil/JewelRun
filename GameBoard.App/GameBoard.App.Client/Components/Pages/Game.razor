@@ -52,7 +52,7 @@
 			<li>@kp.Key = @kp.Value</li>
 		}
 	</ul>
-	<div>Current turn: @CurrentGame.CurrentSide</div>
+	<div>Current turn: @CurrentGame.CurrentSideName</div>
 </details>
 
 @code {
@@ -87,7 +87,7 @@
 
 		if (CurrentGame.HasPiece(args.SourceLocation, out var piece))
 		{			
-			args.IsValid = piece.SideName.Equals(CurrentGame.CurrentSide);
+			args.IsValid = piece.SideName.Equals(CurrentGame.CurrentSideName);
 		}
 	}
 

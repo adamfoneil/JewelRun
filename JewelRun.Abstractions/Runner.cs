@@ -15,7 +15,7 @@ public class Runner
 		Awareness = GetRandom(1, 5),
 		Attack = GetRandom(1, 5),
 		Defense = GetRandom(1, 5),
-		Mobility = GetRandom(1, 5)
+		Mobility = GetRandom(2, 5)
 	};
 
 	public bool AllowMove(Location from, Location to) => from.GetDistance(to) <= Mobility;

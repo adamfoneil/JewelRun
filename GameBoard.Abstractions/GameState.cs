@@ -17,7 +17,9 @@ public abstract class GameState<TPiece>
 
 	public int Width { get; init; }
 	public int Height { get; init; }
-	public string CurrentSide { get; private set; } = default!;
+	public int CurrentSide { get; private set; }
+
+	public string CurrentSideName => Sides[CurrentSide].Name;
 
 	public abstract (string Name, Location Origin)[] Sides { get; }
 
@@ -27,6 +29,8 @@ public abstract class GameState<TPiece>
 		return values[index];
 	}
 
+	protected static int GetRandom(int max) => RandomNumberGenerator.GetInt32(max);
+
 	private Dictionary<string, string> GetPlayers(string[] playerNames) => Sides
 		.Select((s, index) => (s.Name, index))
 		.ToDictionary(item => item.Name, item => playerNames[item.index]);
@@ -34,7 +38,7 @@ public abstract class GameState<TPiece>
 	public void Initialize(params string[] playerNames)
 	{
 		Players = GetPlayers(playerNames);
-		CurrentSide = GetRandom(Sides.Select(s => s.Name).ToArray());
+		CurrentSide = GetRandom(Sides.Length);
 
 		List<(string SideName, Location Location, TPiece Piece)> pieces = [];
 
@@ -62,5 +66,7 @@ public abstract class GameState<TPiece>
 	{
 		Pieces[to] = (sideName, piece);
 		Pieces.Remove(from);
+		CurrentSide++;
+		if (CurrentSide > Sides.Length - 1) CurrentSide = 0;
 	}
 }
