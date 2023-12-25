@@ -1,4 +1,6 @@
 ﻿@page "/"
+@rendermode InteractiveWebAssembly
+
 @using System.Diagnostics
 
 <PageTitle>Home</PageTitle>
@@ -7,13 +9,15 @@
 
 Welcome to your new app.
 
+<p>counter = @counter</p>
 
-<button @onclick="PlainHandler">hello3</button>
+<button @onclick="Increment">hello3</button>
 
 @code {
-	private async Task PlainHandler(MouseEventArgs args)
+	private int counter = 0;
+
+	private void Increment()
 	{
-		await Task.CompletedTask;
-		Debugger.Break();
+		counter++;
 	}
 }

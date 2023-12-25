@@ -1,4 +1,5 @@
-using GameBoard.App.Components;
+using SecondApp.Client.Pages;
+using SecondApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +22,12 @@ else
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-	.AddInteractiveWebAssemblyRenderMode();
-	//.AddAdditionalAssemblies(typeof(GameBoard.App.Client._Imports).Assembly);
+	.AddInteractiveWebAssemblyRenderMode()
+	.AddAdditionalAssemblies(typeof(Counter).Assembly);
 
 app.Run();
