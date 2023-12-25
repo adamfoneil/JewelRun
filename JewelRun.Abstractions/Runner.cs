@@ -12,10 +12,10 @@ public class Runner
 
 	public static Runner Create(string name) => new(name)
 	{
-		Awareness = GetRandom(1, 4),
-		Attack = GetRandom(1, 3),
-		Defense = GetRandom(1, 3),
-		Mobility = GetRandom(3, 7)
+		Awareness = GetRandom(1, 5),
+		Attack = GetRandom(1, 5),
+		Defense = GetRandom(1, 5),
+		Mobility = GetRandom(1, 5)
 	};
 
 	public bool AllowMove(Location from, Location to) => from.GetDistance(to) <= Mobility;
