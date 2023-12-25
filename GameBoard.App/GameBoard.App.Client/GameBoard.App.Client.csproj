@@ -12,4 +12,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\GameBoard.Abstractions\GameBoard.Abstractions.csproj" />
+    <ProjectReference Include="..\..\JewelRun.Abstractions\JewelRun.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

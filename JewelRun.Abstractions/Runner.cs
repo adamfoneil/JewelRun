@@ -6,7 +6,7 @@ namespace JewelRun.Abstractions;
 public class Runner
 {
 	private Runner(string name)
-	{			
+	{
 		Name = name;
 	}
 
